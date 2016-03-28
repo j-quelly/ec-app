@@ -1,4 +1,4 @@
-# edmodo-code-challenge
+# ec-app
 - A single-page client-side application that allows a teacher to browse homework assignments and submissions.
 
 ### Current Version: 1.1.1

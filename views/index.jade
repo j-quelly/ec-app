@@ -1,0 +1,50 @@
+extends layout
+
+block content 
+  header(td-sidebar)
+    .container
+      a.button-collapse.top-nav.hide-on-large-only.right(href='#', data-activates='nav-mobile')
+        i.mdi-navigation-menu
+      ul#nav-mobile.side-nav.fixed
+        li.center.logo
+          a(href="/#/").logo__link
+            img.logo__img(src="images/Edmodo_logo.svg", width="64", height="64", alt="Edmodo") 
+        li
+          h2.side-nav__title.center Assignments
+        li.stagger(ng-repeat="assignment in assignments track by $index", ng-click="selectAssignment('/assignment/' + assignment.id); activate(assignment);")
+          .col.s12.m6
+            .card.hoverable(ng-class="{active: isActive(assignment), active : getPathId() == assignment.id}")
+              a.card-content
+                span.card-title {{ assignment.title }}
+                p due {{ assignment.due_at | date : 'MMMM d, yyyy' : timezone}}            
+
+  main.container
+    .assignment
+      div(ng-view)        
+
+  .fixed-action-btn
+    a.btn-floating.btn-large.blue(href="#add-assignment", modal)
+      i.large.material-icons add   
+
+   #add-assignment.modal
+      .modal-content
+        a.modal-action.modal-close.btn-flat.right X  
+        h5 Assignment
+        form.form(ng-submit="createAssignment()")
+          .input-field.col.s12(input-field)
+            input(type="text", ng-model="assignmentForm.title")
+            label Assignment Title
+
+          .input-field.col.s12(input-field)
+            input.validate(type="date", ng-model="assignmentForm.due_at", min="{{ today | date : 'yyyy-MM-dd' }}", placeholder="{{ today | date : 'yyyy-MM-dd' }}")
+            label
+
+          .input-field.col.s12(input-field)
+            textarea.materialize-textarea(ng-model="assignmentForm.description")
+            label Assignment Description
+            
+          .col.s12
+            input.btn-large.green.modal-close.right(ng-disabled="!assignmentForm.title || !assignmentForm.due_at || !assignmentForm.description", type="submit", value="Submit")         
+            .clear
+
+    footer(ed-toasts)  

@@ -1,0 +1,30 @@
+.row(ng-show="loaded")
+  .col.s12(ng-if="showTabs")
+    ul.tabs.z-depth-1(tabs)
+      li.tab.col.s6
+        a.active(href='#assignment') Assignment
+      li.tab.col.s6
+        a(href='#submission') Submissions     
+
+  #assignment
+    .col.s12.m8
+      h1.assignment__title {{ assignment.title }}
+    .col.s12.m4
+      span.assignment__date due {{ assignment.due_at | date: 'MMMM d, yyyy' }}
+    .col.s12
+      p {{ assignment.description }}
+
+  #submission
+    .col.s12      
+      .alert(ng-show="noSubmissions")
+        .alert--info
+          p.alert__body {{ noSubmissions }}
+      ul.collapsible(ng-hide="noSubmissions", data-collapsible="expandable", watch)
+        li(ng-repeat="submission in submissions")
+          .collapsible-header
+            .submission-details
+              img.responsive-img.circle.submission-details__img(ng-src="{{ submission.creator.avatars.large }}")
+              p.submission-details__student {{ submission.creator.first_name }} {{ submission.creator.last_name }}
+              p.submission-details__date turned in {{ submission.submitted_at | date: "MMMM, d, yyyy"}}
+          .collapsible-body
+            p {{ submission.content }}     

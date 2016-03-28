@@ -1,0 +1,394 @@
+@charset "UTF-8";
+// Mixins
+// @import "components/prefixer";
+@import "components/mixins";
+@import "components/color";
+// Variables;
+@import "components/variables";
+// Reset
+@import "components/normalize";
+// components
+@import "components/global";
+@import "components/icons-material-design";
+@import "components/grid";
+// @import "components/navbar";
+@import "components/roboto";
+@import "components/typography";
+@import "components/cards";
+@import "components/toast";
+@import "components/tabs";
+// @import "components/tooltip";
+@import "components/buttons";
+// @import "components/dropdown";
+// @import "components/waves";
+@import "components/modal";
+@import "components/collapsible";
+// @import "components/chips";
+// @import "components/materialbox";
+@import "components/form";
+// @import "components/table_of_contents";
+@import "components/sideNav";
+// @import "components/preloader";
+// @import "components/slider";
+// @import "components/carousel";
+// @import "components/date_picker/default.scss";
+// @import "components/date_picker/default.date.scss";
+// @import "components/date_picker/default.time.scss";
+
+/**
+* Structure
+*/
+
+html {
+    overflow-y: scroll;
+}
+
+
+/**
+* Sidebar 
+*/
+
+.side-nav {
+    li {
+        &:hover {
+            background: #fff;
+        }
+    }
+    @at-root #{&}__title {
+        font-size: 20px;
+        color: #4e5565;
+    }
+}
+
+.button-collapse {
+    position: absolute;
+    font-size: 48px;
+    right: 20px;
+    z-index: 100;
+    top: 0px;
+}
+
+
+/**
+* Logo 
+*/
+
+.logo {
+    border-bottom: solid 1px #ddd;
+    @at-root #{&}__link {
+        height: 131px !important;
+    }
+    @at-root #{&}__img {
+        margin: 35px 0 5px 0;
+        cursor: pointer;
+    }
+}
+
+
+/**
+* Cards 
+*/
+
+.card {
+    cursor: pointer;
+    border-bottom: solid 2px #fff;
+    .card-title {
+        font-size: 18px;
+        color: #4e5565;
+        display: block;
+        margin: 0 0 20px 0;
+        line-height: 1.5 !important;
+    }
+    .card-content {
+        color: #ec8814 !important;
+        line-height: 1.5;
+        padding: 20px 20px 27px 20px !important;
+        height: auto !important;
+    }
+}
+
+
+/* uncss:ignore */
+
+.card.active {
+    border-bottom: solid 2px #2d7ccc;
+}
+
+
+/**
+* Alert
+*/
+
+.alert {
+    border: solid 1px #f0f0f0;
+    height: 428px;
+    position: relative;
+    margin: 31px 0 0 0;
+    @at-root #{&}--info {
+        background: #F6F7F9;
+        position: absolute;
+        display: table;
+        min-height: 100%;
+        height: 100%;
+        width: 100%;
+    }
+    @at-root #{&}__body {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        color: #6c7488;
+        font-size: 20px;
+        width: inherit;
+    }
+    @at-root #{&}--hide {
+        display: none;
+    }
+}
+
+
+/**
+* Assignments
+*/
+
+.assignment {
+    margin: 145px 0 0 240px;
+    @at-root #{&}__title {
+        font-size: 26px;
+        margin: 31px 0 25px 0;
+    }
+    @at-root #{&}__date {
+        font-size: 14px;
+        color: #ec8814;
+        margin: 38px 0 0 0;
+        float: right;
+    }
+}
+
+
+/**
+* Submisison Details
+*/
+
+.submission-details {
+    vertical-align: top;
+    margin: 0 0 14px 0;
+    @at-root #{&}__student {
+        margin: 0;
+        font-size: 18px;
+        line-height: 3;
+    }
+    @at-root #{&}__date {
+        margin: 0;
+        color: #ec8814;
+        line-height: 1.5;
+    }
+    @at-root #{&}__img {
+        width: 70px;
+        margin: 9px 15px 0 0;
+        float: left;
+    }
+}
+
+
+/**
+* Collapsible
+*/
+
+.collapsible {
+    margin: 31px 0 25px 0;
+}
+
+
+/**
+* Modal
+*/
+
+.modal-content {
+    h5 {
+        margin: 0 0 30px 0;
+    }
+}
+
+
+/**
+* Forms*/
+
+.input-field label {
+    color: #9e9e9e;
+    cursor: text;
+    font-size: 1rem;
+    left: 0;
+    position: absolute;
+    top: 0.8rem;
+    transition: all 0.2s ease-out 0s;
+}
+
+.input {
+    label {
+        color: #fff;
+    }
+}
+
+
+/* uncss:ignore */
+
+input::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+
+/* uncss:ignore */
+
+input[type="date"]::-webkit-input-placeholder {
+    visibility: hidden !important;
+}
+
+
+/**
+* Modifiers
+*/
+
+.red {
+    border: solid 1px $error-color;
+}
+
+.bg {
+    background: #ccc;
+}
+
+.clear {
+    clear: both;
+}
+
+
+/* uncss:ignore */
+
+.error {
+    background-color: $error-color;
+    color: #fff;
+}
+
+
+/* uncss:ignore */
+
+input[type=date].ng-invalid-min {
+    border-bottom: solid 2px $error-color;
+}
+
+
+/**
+* Animations
+*/
+
+
+/* uncss:ignore */
+
+.stagger.ng-enter {
+    /* standard transition code */
+    transition: 1s linear all;
+    opacity: 0;
+}
+
+
+/* uncss:ignore */
+
+.stagger.ng-enter-stagger {
+    /* this will have a 100ms delay between each successive leave animation */
+    transition-delay: 0.1s;
+    /* As of 1.4.4, this must always be set: it signals ngAnimate
+    to not accidentally inherit a delay property from another CSS class */
+    transition-duration: 0s;
+}
+
+
+/* uncss:ignore */
+
+.stagger.ng-enter.ng-enter-active {
+    /* standard transition styles */
+    opacity: 1;
+}
+
+
+/* uncss:ignore */
+
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+    display: none !important;
+}
+
+
+/* uncss:ignore */
+
+.ng-hide-remove {
+    animation: .5s fade-in ease;
+}
+
+
+/* uncss:ignore */
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* uncss:ignore */
+
+@media #{$small-and-down} {
+    // styles for small screens and down
+    /**
+    * Assignments
+    */
+    /* uncss:ignore */
+    .assignment {
+        margin: 75px 0 0 0;
+        /* uncss:ignore */
+        @at-root #{&}__title {
+            font-size: 26px;
+            margin: 31px 0 25px 0;
+        }
+        /* uncss:ignore */
+        @at-root #{&}__date {
+            font-size: 14px;
+            color: #ec8814;
+            margin: 0 0 0 0;
+            float: right;
+        }
+    }
+}
+
+@media #{$medium-and-up} {
+    // styles for medium screens and larger
+}
+
+
+/* uncss:ignore */
+
+@media #{$medium-and-down} {
+    /**
+    * Assignments
+    */
+    /* uncss:ignore */
+    .assignment {
+        margin: 75px 0 0 0;
+    }
+    /**
+    * Alert
+    */
+    /* uncss:ignore */
+    .alert {
+        margin: 31px 0 0 0;
+    }
+}
+
+@media #{$large-and-up} {
+    // styles for large screens and up
+}

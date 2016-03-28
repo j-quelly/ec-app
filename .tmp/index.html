@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html ng-app="edmodo">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title></title>
+    <link rel="icon" type="image/png" href="favicon.ico">
+    <!-- bower:css-->
+    <!-- endbower-->
+    <link rel="stylesheet" href="css/app.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+  <body ng-controller="AssignmentController">
+    <header td-sidebar>
+      <div class="container"><a href="#" data-activates="nav-mobile" class="button-collapse top-nav hide-on-large-only right"><i class="mdi-navigation-menu"></i></a>
+        <ul id="nav-mobile" class="side-nav fixed">
+          <li class="center logo"><a href="/#/" class="logo__link"><img src="images/Edmodo_logo.svg" width="64" height="64" alt="Edmodo" class="logo__img"></a></li>
+          <li>
+            <h2 class="side-nav__title center">Assignments</h2>
+          </li>
+          <li ng-repeat="assignment in assignments track by $index" ng-click="selectAssignment('/assignment/' + assignment.id); activate(assignment);" class="stagger">
+            <div class="col s12 m6">
+              <div ng-class="{active: isActive(assignment), active : getPathId() == assignment.id}" class="card hoverable"><a class="card-content"><span class="card-title">{{ assignment.title }}</span>
+                  <p>due {{ assignment.due_at | date : 'MMMM d, yyyy' : timezone}}            </p></a></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <main class="container">
+      <div class="assignment">
+        <div ng-view>       </div>
+      </div>
+    </main>
+    <div class="fixed-action-btn"><a href="#add-assignment" modal class="btn-floating btn-large blue"><i class="large material-icons">add   </i></a></div>
+    <div id="add-assignment" class="modal">
+      <div class="modal-content"><a class="modal-action modal-close btn-flat right">X  </a>
+        <h5>Assignment</h5>
+        <form ng-submit="createAssignment()" class="form">
+          <div input-field class="input-field col s12">
+            <input type="text" ng-model="assignmentForm.title">
+            <label>Assignment Title</label>
+          </div>
+          <div input-field class="input-field col s12">
+            <input type="date" ng-model="assignmentForm.due_at" min="{{ today | date : 'yyyy-MM-dd' }}" placeholder="{{ today | date : 'yyyy-MM-dd' }}" class="validate">
+            <label></label>
+          </div>
+          <div input-field class="input-field col s12">
+            <textarea ng-model="assignmentForm.description" class="materialize-textarea"></textarea>
+            <label>Assignment Description</label>
+          </div>
+          <div class="col s12">
+            <input ng-disabled="!assignmentForm.title || !assignmentForm.due_at || !assignmentForm.description" type="submit" value="Submit" class="btn-large green modal-close right">
+            <div class="clear"></div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <footer ed-toasts> </footer>
+    <!-- bower:js-->
+    
+    
+    
+    
+    
+    <script src="js/lib.min.js"></script>
+    <!-- endbower  -->
+    <!-- app-->
+    <!-- controllers-->
+    <script src="js/app.min.js"></script>
+    <!-- directives        -->
+    <!-- livereload    -->
+  </body>
+</html>
+
+
+<div ng-show="loaded" class="row">
+  <div ng-if="showTabs" class="col s12">
+    <ul tabs="tabs" class="tabs z-depth-1">
+      <li class="tab col s6"><a href="#assignment" class="active">Assignment</a></li>
+      <li class="tab col s6"><a href="#submission">Submissions     </a></li>
+    </ul>
+  </div>
+  <div id="assignment">
+    <div class="col s12 m8">
+      <h1 class="assignment__title">{{ assignment.title }}</h1>
+    </div>
+    <div class="col s12 m4"><span class="assignment__date">due {{ assignment.due_at | date: 'MMMM d, yyyy' }}</span></div>
+    <div class="col s12">
+      <p>{{ assignment.description }}</p>
+    </div>
+  </div>
+  <div id="submission">
+    <div class="col s12">     
+      <div ng-show="noSubmissions" class="alert">
+        <div class="alert--info">
+          <p class="alert__body">{{ noSubmissions }}</p>
+        </div>
+      </div>
+      <ul ng-hide="noSubmissions" data-collapsible="expandable" watch="watch" class="collapsible">
+        <li ng-repeat="submission in submissions">
+          <div class="collapsible-header">
+            <div class="submission-details"><img ng-src="{{ submission.creator.avatars.large }}" class="responsive-img circle submission-details__img"/>
+              <p class="submission-details__student">{{ submission.creator.first_name }} {{ submission.creator.last_name }}</p>
+              <p class="submission-details__date">turned in {{ submission.submitted_at | date: "MMMM, d, yyyy"}}</p>
+            </div>
+          </div>
+          <div class="collapsible-body">
+            <p>{{ submission.content }}     </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<div class="row alert">
+  <div class="col s12 alert--info">
+    <p class="alert__body">Select an assignment     </p>
+  </div>
+</div>

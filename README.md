@@ -3,13 +3,14 @@
 
 ### Current Version: 1.1.1
 
-## Getti
+## Getting Started
 1. ```$ npm install```
+3. ```$ bower install```
 2. ```$ npm start```
 3. Open browser to http://localhost:3000
 
 ## Default Usage
-
+https://whispering-brook-13648.herokuapp.com/#/
 
 ## Alternative Usage
 ```$ grunt serve-dev```
